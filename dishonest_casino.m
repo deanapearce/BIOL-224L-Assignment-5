@@ -17,7 +17,7 @@ for i = 1:length(b1)
     end
 end
 %split h1 into dimers
-h1_dimers = cell(1,length(h1));
+h1_dimers = cell(1,length(h1)-1);
 for i = 1:length(h1)-1
     h1_dimers{i} = [h1(1,i),h1(1,i+1)];
 end
