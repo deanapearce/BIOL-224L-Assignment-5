@@ -28,5 +28,5 @@ lambda1 = mnpdf(s2count_dimer, reshape(expect_mn,1,[]));
 lambda2 = mnpdf(s2count_dimer, reshape(expect_markov,1,[]));
 % calculate the likelihood ratio test statistic
 LR = -2 * log(lambda1 / lambda2);
-% test that statistic against a chi-squared distribution with 12 df (weighted binomial = 3 df)
-chi2pdf(LR, 9)
+% test that statistic against a chi-squared distribution with 15 df (weighted binomial = 3 df)
+chi2pdf(LR, 12)
