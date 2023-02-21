@@ -1,0 +1,32 @@
+%1 = A, 2 = C, 3 = G, and 4 = T
+
+%import parameters
+params;
+%generate multinomial and markovian sequences
+%s1 = randsample(1:4, 1000, true, pi); % multinomial
+s2 = markov(x, pi, P, 1000); % markovian
+% count the number of each nucleotide in the two sequences
+%s1counts = [sum(s1(:)==1), sum(s1(:)==2),sum(s1(:)==3), sum(s1(:)==4)];
+%s2counts = [sum(s2(:)==1), sum(s2(:)==2),sum(s2(:)==3), sum(s2(:)==4)];
+% reshape the 2x2 arrays into one-dimensional vectors
+%s1counts = reshape(s1counts, 1, []);
+%s2counts = reshape(s2counts, 1, []);
+% calculate expected dimer frequency multinomial
+expect_mn = transpose(pi) * pi;
+% calculate expected dimer frequency markov
+expect_markov = transpose(transpose(pi).*P);
+% count the number of each dimer in the two sequences
+%s1count_dimer = cell2mat(struct2cell(dimercount(s1)));
+s2count_dimer = transpose(cell2mat(struct2cell(dimercount(s2))));
+% calculate the likelihood of observing s1 under the null hypothesis of equal nucleotide frequencies
+%lambda1 = mnpdf(s1counts, [.25,.25,.25,.25]);
+% calculate the likelihood of observing s2 under the null hypothesis of multinomial generation
+lambda1 = mnpdf(s2count_dimer, reshape(expect_mn,1,[]));
+% and the likelihood under the alternate hypothesis that pi = observed frequencies
+%lambda2 = mnpdf(s1counts, pi);
+% and the likelihood under the alternate hypothesis of markovian
+lambda2 = mnpdf(s2count_dimer, reshape(expect_markov,1,[]));
+% calculate the likelihood ratio test statistic
+LR = -2 * log(lambda1 / lambda2);
+% test that statistic against a chi-squared distribution with 12 df (weighted binomial = 3 df)
+chi2pdf(LR, 9)
