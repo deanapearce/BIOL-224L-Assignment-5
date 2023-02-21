@@ -32,5 +32,9 @@ b2 = [2,2,6,1,3,2,6,5,6,3,6,6,1,6,6,1,6,6,6,2,4,6,6,4,5,3,3,5,1,1,2,3,5,5,1,3,4,
 %pseudoemission calcs
 [b1_prav_counts,b1_prav_elements] = groupcounts(transpose(b1_prav));
 [b1_neprav_counts,b1_neprav_elements] = groupcounts(transpose(b1_neprav));
+%pseudotransmission calcs
+h1_dimers_mat = cell2mat(transpose(h1_dimers));
+h1_dimers_mat_cat = strcat(string(h1_dimers_mat(:,1)),string(h1_dimers_mat(:,2)));
+[h1_dimers_counts,h1_dimers_elements] = groupcounts(h1_dimers_mat_cat);
 
-[P,E] = hmmestimate(b1,h1,'Pseudotransitions',,'Pseudoemissions',[b1_prav_counts*(1/sum(b1_prav_counts));b1_neprav_counts*(1/sum(b1_neprav_counts)));
+[P,E] = hmmestimate(b1,h1);%,'Pseudotransitions',[h1_dimers_counts(1),h1_dimers_counts(2);h1_dimers_counts(4),h1_dimers_counts(3)]*(1/sum(h1_dimers_counts)),'Pseudoemissions',[b1_prav_counts*(1/sum(b1_prav_counts));b1_neprav_counts*(1/sum(b1_neprav_counts))]);
