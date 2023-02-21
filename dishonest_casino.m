@@ -37,4 +37,8 @@ h1_dimers_mat = cell2mat(transpose(h1_dimers));
 h1_dimers_mat_cat = strcat(string(h1_dimers_mat(:,1)),string(h1_dimers_mat(:,2)));
 [h1_dimers_counts,h1_dimers_elements] = groupcounts(h1_dimers_mat_cat);
 
-[P,E] = hmmestimate(b1,h1,'Pseudotransitions',[h1_dimers_counts(1),h1_dimers_counts(2);h1_dimers_counts(4),h1_dimers_counts(3)]+1,'Pseudoemissions',[transpose(b1_prav_counts);transpose(b1_neprav_counts)]+1);
+[P,E] = hmmestimate(b1,h1,...
+    'Pseudotransitions',...
+        [h1_dimers_counts(1),h1_dimers_counts(2);h1_dimers_counts(4),h1_dimers_counts(3)]+1,... %[f->f,f->l;l->l;l->f] (+1 to all for L)
+        'Pseudoemissions',...
+        [transpose(b1_prav_counts);transpose(b1_neprav_counts)]+1); %[count of 1,2,3,4,5,6 for fair; count of 1,2,3,4,5,6 for loaded] (+1 to all for L)
