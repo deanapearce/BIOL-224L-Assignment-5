@@ -47,8 +47,10 @@ This does largely explain the observed characteristics of L runs; both F and L s
 In this scenario, the transition matrix \verb|P| is replaced by \verb|P2|, a more volatile matrix which is as follows:
 \[
 \begin{array}{cc}
-	.80 & .20 \\
-	.10 & .90
+	.60 & .40 \\
+	.40 & .60
 \end{array}
 \]
+This, as one would expect, results in shorter L runs: from 3 to 4, 7 to 9, 11 to 23, 43 to 44.  As the state is more likely to transition from one to another, \verb|hmmviterbi|, as an outsider looking in, is not bound by the 'restriction' of \verb|P| to predict a state sequence which is possible within a highly constrained state transition matrix.
+\subsection{Aggressive Pseudocounts}
 \end{document}
