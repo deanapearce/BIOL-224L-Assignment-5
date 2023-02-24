@@ -36,5 +36,19 @@ Running this with \verb+rng(224)+ results in $p=1.96668919911706\text{e}-07$.
 \subsection{Interpretation}
 This p-value is quite low ($p^2<<.005$), suggesting that the improvement in performance w.r.t. the ability of the model to mimic \verb+s2+ is statistically likely improbable to have happened by random chance.  However, seeing as how \verb+s2+ was created by the same markov model, differing results would be a surprise.  Utilizing the actual DNA sequence could show different results.
 \section{dishonest\_casino}
-
+\subsection{Loaded State Runs}
+In \verb|h1| the starting position of the L run is 17, and it continues until 39, giving a length of 22.  In \verb|h2| it begins at 7 and continues until 23, giving a length of 16.  The transition matrix, as predicted by \verb|hmmestimate| is as follows:
+\[\begin{array}{cc}
+	0.944444444444444 & 0.0555555555555556 \\
+	0.0625000000000000 & 0.937500000000000
+\end{array}\]
+This does largely explain the observed characteristics of L runs; both F and L states are fairly stable, but with a not insignificant chance of flipping.  It is perfectly reasonable for the results of \verb|h1| and \verb|h2| to arise from it.
+\subsection{More Volatile Transition Matrix}
+In this scenario, the transition matrix \verb|P| is replaced by \verb|P2|, a more volatile matrix which is as follows:
+\[
+\begin{array}{cc}
+	.80 & .20 \\
+	.10 & .90
+\end{array}
+\]
 \end{document}
