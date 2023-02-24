@@ -43,3 +43,5 @@ h1_dimers_mat_cat = strcat(string(h1_dimers_mat(:,1)),string(h1_dimers_mat(:,2))
         [h1_dimers_counts(1),h1_dimers_counts(2);h1_dimers_counts(3),h1_dimers_counts(4)]+1,... %[f->f,f->l;l->f;l->l] (+1 to all for L)
     'Pseudoemissions',...
         [transpose(b1_prav_counts);transpose(b1_neprav_counts)]+1); %[count of 1,2,3,4,5,6 for fair; count of 1,2,3,4,5,6 for loaded] (+1 to all for L)
+b2 = [2,2,6,1,3,2,6,5,6,3,6,6,1,6,6,1,6,6,6,2,4,6,6,4,5,3,3,5,1,1,2,3,5,5,1,3,4,3,4,4,2,3,1,6,2,1,3,2,3,3];
+h2 = hmmviterbi(b2,P,E);
