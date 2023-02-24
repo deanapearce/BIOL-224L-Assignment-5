@@ -38,19 +38,20 @@ This p-value is quite low ($p^2<<.005$), suggesting that the improvement in perf
 \section{dishonest\_casino}
 \subsection{Loaded State Runs}
 In \verb|h1| the starting position of the L run is 17, and it continues until 39, giving a length of 22.  In \verb|h2| it begins at 7 and continues until 23, giving a length of 16.  The transition matrix, as predicted by \verb|hmmestimate| is as follows:
-\[\begin{array}{cc}
+\[\begin{pmatrix}
 	0.944444444444444 & 0.0555555555555556 \\
 	0.0625000000000000 & 0.937500000000000
-\end{array}\]
+\end{pmatrix}\]
 This does largely explain the observed characteristics of L runs; both F and L states are fairly stable, but with a not insignificant chance of flipping.  It is perfectly reasonable for the results of \verb|h1| and \verb|h2| to arise from it.
 \subsection{More Volatile Transition Matrix}
 In this scenario, the transition matrix \verb|P| is replaced by \verb|P2|, a more volatile matrix which is as follows:
 \[
-\begin{array}{cc}
+\begin{pmatrix}
 	.60 & .40 \\
 	.40 & .60
-\end{array}
+\end{pmatrix}
 \]
-This, as one would expect, results in shorter L runs: from 3 to 4, 7 to 9, 11 to 23, 43 to 44.  As the state is more likely to transition from one to another, \verb|hmmviterbi|, as an outsider looking in, is not bound by the 'restriction' of \verb|P| to predict a state sequence which is possible within a highly constrained state transition matrix.
+This, as one would expect, results in shorter L runs: from 3 to 4, 7 to 9, 11 to 23, 43 to 44.  As the state is more likely to transition from one to another, \verb|hmmviterbi|, as an outsider looking in, is not bound by the "restriction" of \verb|P| to predict a state sequence which is possible within a highly constrained state transition matrix.
 \subsection{Aggressive Pseudocounts}
+Although altering the pseudocounts does alter the predicted transition matrix and emission probablities, it does so to a very slight degree, one which is not significant enough degree as to affect the decoding of the model and alter the predicted state sequence. Additionally, it is notable that predicting the state sequence completely without pseudocounts also does not significantly alter the predicted transition matrix or emission probablities, nor does it alter the predicted state sequence.  Most likely, this is attributable to the input data being of a large enough size as to allow all possible states, and the behavior under such states, to be exhibited; pseudocounts have the most pronounced effect when they display a possibility which was not present in the sample data.
 \end{document}
